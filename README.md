@@ -38,7 +38,7 @@ Antes de executar o projeto, instale:
 Clone o repositório:
 
 ```bash
-git clone <URL_DO_REPOSITORIO>
+git clone https://github.com/CodeSenna/CRUD-PHP.git
 ```
 
 Ou baixe o ZIP e extraia.
