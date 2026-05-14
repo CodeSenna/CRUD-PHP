@@ -1,99 +1,172 @@
-# 📘 Projeto PHP — Trabalho Acadêmico
+# 📘 Sistema de Chamados (Help Desk) — PHP + MySQL
 
-![PHP](https://img.shields.io/badge/PHP-8.x-777BB4?style=for-the-badge&logo=php&logoColor=white)
-![Status](https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow?style=for-the-badge)
-![Licença](https://img.shields.io/badge/Licen%C3%A7a-MIT-green?style=for-the-badge)
-
-## 📋 Sobre o Projeto
-
-Este projeto foi desenvolvido como trabalho acadêmico para a disciplina de **Desenvolvimento Web** do curso de graduação. A aplicação foi construída utilizando **PHP** como linguagem back-end, com foco em boas práticas de programação, organização de código e aplicação dos conceitos estudados em sala de aula.
-
-## 🚀 Funcionalidades
-
-- [ ] Cadastro e autenticação de usuários
-- [ ] CRUD completo de registros
-- [ ] Interface web responsiva
-- [ ] Integração com banco de dados MySQL
-- [ ] Validação de formulários
-
-## 🛠️ Tecnologias Utilizadas
-
-| Tecnologia | Descrição |
-|---|---|
-| PHP 8.x | Linguagem back-end principal |
-| MySQL | Banco de dados relacional |
-| HTML5 / CSS3 | Estrutura e estilização das páginas |
-| JavaScript | Interatividade no front-end |
-| Apache / XAMPP | Servidor local de desenvolvimento |
-
-## 📁 Estrutura do Projeto
-
-```
-projeto-php/
-├── assets/
-│   ├── css/
-│   ├── js/
-│   └── img/
-├── config/
-│   └── database.php
-├── includes/
-│   ├── header.php
-│   └── footer.php
-├── pages/
-├── index.php
-└── README.md
-```
-
-## ⚙️ Como Executar
-
-### Pré-requisitos
-
-- [XAMPP](https://www.apachefriends.org/) ou [PHP 8+](https://www.php.net/) instalado
-- MySQL / MariaDB
-- Navegador web
-
-### Passo a passo
-
-1. **Clone o repositório**
-   ```bash
-   git clone https://github.com/usuario/projeto-php.git
-   ```
-
-2. **Mova para a pasta do servidor local**
-   ```bash
-   # No XAMPP, copie para:
-   C:/xampp/htdocs/projeto-php
-   ```
-
-3. **Configure o banco de dados**
-   - Crie um banco de dados no MySQL
-   - Importe o arquivo `database.sql` (se disponível)
-   - Edite as credenciais em `config/database.php`
-
-4. **Acesse no navegador**
-   ```
-   http://localhost/projeto-php/
-   ```
-
-## 👥 Integrantes
-
-| Nome | GitHub |
-|---|---|
-| **Matheus Henrique Senna de Sousa** | [@matheus-senna](https://github.com/) |
-| **Gabriel Brochi Julio** | [@gabriel-brochi](https://github.com/) |
-
-## 🏫 Informações Acadêmicas
-
-- **Instituição:** — *(insira o nome da faculdade)*
-- **Curso:** — *(insira o nome do curso)*
-- **Disciplina:** — *(insira o nome da disciplina)*
-- **Professor(a):** — *(insira o nome do professor)*
-- **Semestre:** 1º Semestre / 2025
-
-## 📄 Licença
-
-Este projeto está sob a licença MIT. Consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
+Sistema simples de gerenciamento de chamados (CRUD), desenvolvido com PHP, MySQL e Bootstrap para fins acadêmicos.
 
 ---
 
-<p align="center">Desenvolvido com ❤️ para fins acadêmicos</p>
+## 👥 Integrantes
+
+- Matheus Henrique Senna de Sousa
+- Gabriel Brochi Julio
+
+---
+
+## 🛠️ Tecnologias utilizadas
+
+- PHP 8+
+- MySQL
+- PDO (PHP Data Objects)
+- Bootstrap 5.3
+- HTML, CSS e JavaScript
+
+---
+
+## ⚙️ Requisitos
+
+Antes de executar o projeto, instale:
+
+- [XAMPP](https://www.apachefriends.org/) (Apache + MySQL + PHP)
+- Navegador (Chrome recomendado)
+- MySQL Workbench (opcional)
+
+---
+
+## 🚀 Como executar o projeto
+
+### 1. Baixar o projeto
+
+Clone o repositório:
+
+```bash
+git clone <URL_DO_REPOSITORIO>
+```
+
+Ou baixe o ZIP e extraia.
+
+### 2. Colocar na pasta do servidor
+
+Mova a pasta do projeto para dentro de:
+
+```
+C:\xampp\htdocs\
+```
+
+Exemplo:
+
+```
+C:\xampp\htdocs\CRUD_PHP
+```
+
+### 3. Iniciar o servidor
+
+Abra o XAMPP e inicie:
+
+- ✅ Apache
+- ✅ MySQL
+
+### 4. Criar o banco de dados
+
+Abra o MySQL Workbench ou o terminal e execute o arquivo `database.sql`, ou rode o script abaixo:
+
+```sql
+CREATE DATABASE IF NOT EXISTS devdb;
+USE devdb;
+
+CREATE TABLE IF NOT EXISTS chamados (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    titulo VARCHAR(255) NOT NULL,
+    descricao TEXT NOT NULL,
+    prioridade ENUM('baixa', 'media', 'alta') NOT NULL,
+    status ENUM('aberto', 'andamento', 'fechado') DEFAULT 'aberto',
+    data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO chamados (titulo, descricao, prioridade, status) VALUES 
+('Erro no Servidor', 'O servidor Apache não está iniciando corretamente.', 'alta', 'aberto'),
+('Ajuste de CSS', 'O cabeçalho não está responsivo em telas pequenas.', 'baixa', 'andamento');
+```
+
+### 5. Configurar o ambiente
+
+Renomeie o arquivo `.env.example` para `.env` e ajuste as credenciais:
+
+```env
+DB_HOST=localhost
+DB_PORT=3306
+DB_NAME=devdb
+DB_USER=root
+DB_PASSWORD=
+```
+
+> **Nota:** o projeto lê as variáveis do `.env` via função própria em `config/database.php`, sem dependências externas.
+
+### 6. Acessar o sistema
+
+Abra no navegador:
+
+```
+http://localhost/CRUD_PHP
+```
+
+---
+
+## 📌 Funcionalidades
+
+- ✅ Criar chamados (via modal)
+- ✅ Listar chamados em tabela
+- ✅ Editar chamados (via modal, reaproveitado)
+- ✅ Excluir chamados (com confirmação)
+- ✅ Filtrar por status (Aberto / Em Andamento / Fechado)
+- ✅ Badges coloridos por prioridade (Alta / Média / Baixa)
+- ✅ Aviso na tela quando o banco não estiver conectado
+- ✅ Interface responsiva com Bootstrap 5.3
+
+---
+
+## 📁 Estrutura do projeto
+
+```
+CRUD_PHP/
+├── api/
+│   ├── post.php       # Criação de chamado
+│   ├── put.php        # Edição de chamado
+│   └── delete.php     # Exclusão de chamado
+├── config/
+│   └── database.php   # Conexão PDO + leitura do .env
+├── includes/
+│   ├── header.php     # Navbar + Bootstrap CSS
+│   └── footer.php     # Rodapé + Bootstrap JS
+├── database.sql       # Script de criação do banco
+├── index.php          # Página principal (listagem + modais)
+└── .env               # Variáveis de ambiente (não versionar)
+```
+
+---
+
+## ⚠️ Problemas comuns
+
+**Banco não conecta**
+- Verifique se o MySQL está rodando no XAMPP
+- Confira as credenciais no `.env`
+- Certifique-se de que o banco `devdb` foi criado
+
+**Página não abre**
+- Verifique se o projeto está dentro do `htdocs`
+- Confirme a URL: `http://localhost/CRUD_PHP`
+
+**Tabela não existe**
+- Execute novamente o arquivo `database.sql`
+
+**`.env` não é lido**
+- Confirme que o arquivo se chama exatamente `.env` (sem extensão extra)
+- Verifique se está na raiz do projeto, ao lado do `index.php`
+
+---
+
+## ✅ Resultado esperado
+
+Após seguir todos os passos, o sistema estará funcionando com:
+
+- ✅ CRUD completo de chamados
+- ✅ Banco de dados integrado
+- ✅ Interface web funcional e responsiva
